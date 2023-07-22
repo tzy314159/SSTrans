@@ -104,6 +104,4 @@ class FastASTDataSet(BaseASTDataSet):
         return edges_data
 
     def __getitem__(self, index):
-        # print("__getitem"*5)
-        # print(self.edges_data[index])
         return self.edges_data[index], self.edges_data[index].target

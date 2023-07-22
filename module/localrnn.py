@@ -35,7 +35,6 @@ class MultiHeadedAttention_original(nn.Module):
         if max_relative_positions > 0:
             vocab_size = max_relative_positions * 2 + 1 \
                 if self.use_neg_dist else max_relative_positions + 1
-            # 实验阶段把原来的位置编码换成LoacalRnn
 
 
             self.relative_positions_embeddings_k = nn.Embedding(
@@ -290,9 +289,6 @@ class LocalRNN(nn.Module):
         else:
             raise NotImplementedError
 
-        # self.output = nn.Sequential(nn.Linear(output_dim, output_dim), nn.ReLU())
-
-        # To speed up
 
 
     def forward(self, x):

@@ -279,8 +279,6 @@ class DecoderLayer(nn.Module):
             x, memory, memory, attn_mask=memory_mask, key_padding_mask=memory_key_padding_mask
         ))
         
-        # tgt =  tgt_g+tgt
-        # attn_weights = attn_weights + atten_g
 
         tgt, _ = self.sublayer[2](tgt, self.feed_forward)
         return tgt, attn_weights

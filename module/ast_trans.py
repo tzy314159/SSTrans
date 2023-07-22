@@ -5,7 +5,6 @@ from module.base_seq2seq import BaseTrans
 from module.components import DecoderLayer, BaseDecoder, Generator
 from module import FastMultiHeadedAttention
 from module.localrnn import LocalRNNBlock
-from torch_geometric.nn import GATConv
 from module.torch_gcn import GCN
 
 class FastASTTrans(BaseTrans):
@@ -139,7 +138,7 @@ class FastASTEncoderLayer(nn.Module): # this is encoder unit
         self.dropout = nn.Dropout(dropout)
 
         self.sublayer = _get_clones(SublayerConnection(hidden_size, dropout), 2)
-        self.localrnn = LocalRNNBlock(hidden_size,hidden_size,"LSTM",ksize=4,N=1,dropout=dropout) # localrnn模块
+        self.localrnn = LocalRNNBlock(hidden_size,hidden_size,"LSTM",ksize=4,N=1,dropout=dropout)
         
     def forward(self, src, start_nodes, end_nodes, rel_q, rel_k, rel_v,node_maxtrix):
         src = self.localrnn(src) 

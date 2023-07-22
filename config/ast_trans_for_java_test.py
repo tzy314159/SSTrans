@@ -21,8 +21,8 @@ class ASTTransSchema(Schema):
 
 
 use_clearml = False
-project_name = 'tanh'
-task_name = 'tanh'
+project_name = 'java_model'
+task_name = 'java_model'
 test_optimizer = True
 
 seed = 2010
@@ -33,7 +33,7 @@ max_src_len = 200
 data_type = 'pot'
 
 is_split = True
-is_test = False
+is_test = True
 
 # model 
 hype_parameters = {
@@ -43,7 +43,7 @@ hype_parameters = {
     'num_layers': 6,  # [2, 4, 6]
     'data_dir': 'data_set/processed/py',  # java, py
     'is_split': True,  # need split
-    'is_test': False
+    'is_test': True
 }
 
 
@@ -64,9 +64,9 @@ dropout = 0.1
 batch_size =32 
 num_epochs = 600 
 num_threads = 0
-config_filepath = Path('./config/ast_trans.py')
+config_filepath = Path('./config/ast_trans_for_java_test.py')
 es_patience = 20
-load_epoch_path = ''
+load_epoch_path = 'model/java.pt'
 val_interval = 5
 data_set = FastASTDataSet
 model = FastASTTrans
@@ -82,7 +82,7 @@ criterion = LabelSmoothing(padding_idx=PAD, smoothing=0)
 schema = ASTTransSchema
 g = '0'
 
-checkpoint = None
+checkpoint = 'model/java.pt'
 
 
 

@@ -62,10 +62,6 @@ class FastMultiHeadedAttention(nn.Module):
 
 
 
-        # g_encoder = g_encoder.reshape(key.shape)
-
-        # print(query.shape, key.shape, value.shape,start_nodes.shape,end_nodes.shape,rel_q.shape,rel_k.shape,rel_v.shape)
-        # torch.Size([1, 8, 200, 32]) torch.Size([1, 8, 200, 32]) torch.Size([1, 8, 200, 32]) torch.Size([1, 8, 8, 200]) torch.Size([1, 8, 8, 200]) torch.Size([1, 8, 16, 32]) torch.Size([1, 8, 16, 32]) torch.Size([1, 8, 16, 32])
         output = self.rel_attn(query, key, value,
                                start_nodes=start_nodes, end_nodes=end_nodes,
                                rel_q=rel_q, rel_k=rel_k, rel_v=rel_v)
@@ -147,10 +143,9 @@ class FastMultiHeadedAttention(nn.Module):
         scores = c2c
 
 
-        #以下新加的
+        
         # scores += torch.mul(g_context, k_context).sum(dim=-1)
 
-        #以上新加的
 
         # context -> position
         if rel_k is not None:

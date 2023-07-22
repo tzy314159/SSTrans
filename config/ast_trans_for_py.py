@@ -21,8 +21,8 @@ class ASTTransSchema(Schema):
 
 
 use_clearml = False
-project_name = 'tanhpygcnplus'
-task_name = 'tanhpygcnplus'
+project_name = 'python_model'
+task_name = 'python_model'
 test_optimizer = True
 
 seed = 2021
@@ -64,7 +64,7 @@ dropout = 0.2
 batch_size = 48
 num_epochs = 500
 num_threads = 0
-config_filepath = Path('./config/ast_trans.py')
+config_filepath = Path('./config/ast_trans_for_py.py')
 es_patience = 20
 load_epoch_path = ''
 val_interval = 5

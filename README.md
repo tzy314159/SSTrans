@@ -1,38 +1,66 @@
-# ast_trans_icse
-This is the implementation for AST-Trans: Code Summarization with Efficient Tree-Structured Attention.
-## 1. install environments
-   pip install -r requirements.
-## 2.pre process data
-this step attends to generate pot, sbt, paths and relationship matrices of ASTs.
-The [dataset](https://drive.google.com/drive/folders/1dc42GFE6nx4x5_2_6H-qelTSI1KmPEJe) we proposed have been pre-processed. If you want to pre-process the dataset of your own, you can save ASTs as a json object of format like {'type':'';'value':'','children':[]}, and then run:
+# A Semantic and Structural Transformer for Code Summarization Generation
 
-python pre_process/process.py --data_dir your_data_set_path --max_ast_len 250 --process --make_vocab
+This is the implementation for A Semantic and Structural Transformer for Code Summarization Generation
 
-## 3. run
-we use py_config_runner.
-The config of model is saved at ./config.
-you need to change 'data_dir' to your own data set path.
-clearml is also supported in our implementation.
-if you do not want to use it, just set:
+## 1. Install environments
 
-use_clearml = False
+Use the following command
 
-For run AST-Trans:
+```
+pip install -r requirements.
+```
+
+## 2.Pre process data & Meteor
+
+Our data processing is the based on [1],
+
+We also share the 'paraphrase-en.gz' in valid_metrices/meteor/
+
+The Baidu Netdisk and Google Drive link are as follows
+
+baidu link: https://pan.baidu.com/s/1EqDA3zh2fmfRAbQPtmrbfQ 
+
+pwd: 1111
+
+google link: https://drive.google.com/drive/folders/1ZnmxMRVrlXefMkEuSl93H8erPs6QGWH3?usp=sharing
+
+## 3. Train
+
+The config of model is saved at ./config, you can change 'data_dir' to your own data set path, the "ast_trans_for_java.py" and "ast_trans_for_py.py" is for training.
+
+For train the model:
 
 single-gpu:
 
-python main.py --config ./config/ast_trans.py --g 0
+```
+export CUDA_VISIBLE_DEVICES=0
+python main.py --config ./config/ast_trans_for_py.py --g 0
+```
 
 multi-gpu:
 
-python -u -m torch.distributed.launch --nproc_per_node=2 --use_env main.py --config=./config/ast_trans.py --g 0,1
+```
+export CUDA_VISIBLE_DEVICES=0,1,2,3
+python -u -m torch.distributed.launch --nproc_per_node=4 --use_env main.py --config=./config/ast_trans_for_py.py --g 0,1,2,3
+```
 
-## 4. test
-For test, you can set the parameter 'is_test' to True.
-and set the checkpoint file path.
+
+## 4. Test
+
+For test, you can set the parameter 'is_test' to True and set the checkpoint file path.
 The program will default find the checkpoint based on the hype-parameters.
-And we apply a trained AST-Trans checkpoint file for python in https://box.nju.edu.cn/f/ebdb250c46524268be41/.
-If you want to load model on your specific path, just change the 'load_epoch_path' of the test function in script/train.py 
 
-load_epoch_path = './checkpoint/'
 
+```
+export CUDA_VISIBLE_DEVICES=0
+python main.py --config ./config/ast_trans_for_py_test.py --g 0
+```
+
+
+# Acknowledgement
+
+Our module and dataset processing work is based on these two papers, and we salute the dedicated researchers here
+
+[1]Tang Z, Shen X, Li C, et al. AST-trans: Code summarization with efficient tree-structured attention[C]//Proceedings of the 44th International Conference on Software Engineering. 2022: 150-162.
+
+[2]Wang Z, Ma Y, Liu Z, et al. R-transformer: Recurrent neural network enhanced transformer[J]. arXiv preprint arXiv:1907.05572, 2019.

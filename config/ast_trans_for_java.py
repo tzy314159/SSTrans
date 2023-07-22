@@ -21,13 +21,13 @@ class ASTTransSchema(Schema):
 
 
 use_clearml = False
-project_name = 'tanh'
-task_name = 'tanh'
+project_name = 'java_model'
+task_name = 'java_model'
 test_optimizer = True
 
 seed = 2010
 # data
-data_dir = 'data_set/processed/py'
+data_dir = 'data_set/processed/java'
 max_tgt_len = 40
 max_src_len = 200 
 data_type = 'pot'
@@ -41,7 +41,7 @@ hype_parameters = {
     'par_heads': 8,   # [0,8]
     'max_rel_pos': 1,  # [1, 3, 5, 7]
     'num_layers': 6,  # [2, 4, 6]
-    'data_dir': 'data_set/processed/py',  # java, py
+    'data_dir': 'data_set/processed/java',  # java, py
     'is_split': True,  # need split
     'is_test': False
 }
@@ -61,10 +61,10 @@ is_ignore = True
 dropout = 0.1
 
 # train
-batch_size =32 
+batch_size = 56 
 num_epochs = 600 
 num_threads = 0
-config_filepath = Path('./config/ast_trans.py')
+config_filepath = Path('./config/ast_trans_for_java.py')
 es_patience = 20
 load_epoch_path = ''
 val_interval = 5
