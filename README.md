@@ -14,11 +14,11 @@ pip install -r requirements.
 
 Our data processing is the based on [1],
 
-We also share the 'paraphrase-en.gz' in valid_metrices/meteor/
+We also share the 'paraphrase-en.gz' in valid_metrices/meteor/data
 
 The Baidu Netdisk and Google Drive link are as follows
 
-baidu link: https://pan.baidu.com/s/1EqDA3zh2fmfRAbQPtmrbfQ 
+baidu link: https://pan.baidu.com/s/1EqDA3zh2fmfRAbQPtmrbfQ
 
 pwd: 1111
 
@@ -44,18 +44,15 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3
 python -u -m torch.distributed.launch --nproc_per_node=4 --use_env main.py --config=./config/ast_trans_for_py.py --g 0,1,2,3
 ```
 
-
 ## 4. Test
 
 For test, you can set the parameter 'is_test' to True and set the checkpoint file path.
 The program will default find the checkpoint based on the hype-parameters.
 
-
 ```
 export CUDA_VISIBLE_DEVICES=0
 python main.py --config ./config/ast_trans_for_py_test.py --g 0
 ```
-
 
 # Acknowledgement
 
